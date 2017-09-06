@@ -3,8 +3,6 @@ package advent.day1
 enum class Card {
     N, E, S, W;
 
-    fun ns(): Boolean = this == N || this == S
-
     fun rotate(dir: Char): Card {
         val values = values()
         return when (dir) {
