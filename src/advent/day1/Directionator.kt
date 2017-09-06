@@ -16,8 +16,8 @@ enum class Card {
 }
 
 class Directionator(directions: String) {
-    var x = 0
-    var y = 0
+    private var x = 0
+    private var y = 0
     var facing: Card = Card.N
 
     init {
