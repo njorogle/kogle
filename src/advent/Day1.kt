@@ -1,4 +1,4 @@
-package advent.day1
+package advent
 
 import java.util.*
 

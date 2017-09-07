@@ -1,4 +1,4 @@
-package advent.day2
+package advent
 
 // TODO how do I create a cache of the keys?  object class?
 
