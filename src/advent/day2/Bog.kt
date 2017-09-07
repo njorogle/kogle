@@ -1,5 +1,7 @@
 package advent.day2
 
+// TODO how do I create a cache of the keys?  object class?
+
 interface Key {
 	val button: String
 	fun press(input: String): Key
@@ -66,22 +68,18 @@ class AdvancedKey(val x: Int, val y: Int): Key {
 	}
 
 	private fun moveX(step: Int): AdvancedKey {
-		val (min, max) = trim(x)
+		val (min, max) = trim(y)
 		return AdvancedKey(clamp(x + step, min, max), y)
 	}
 
 	private fun moveY(step: Int): AdvancedKey {
-		val (min, max) = trim(y)
+		val (min, max) = trim(x)
 		return AdvancedKey(x, clamp(y + step, min, max))
 
 	}
 
 	private fun trim(v: Int): Pair<Int, Int> {
-		val trim = when (Math.abs(v - 2)) {
-			2 -> 0
-			1 -> 1
-			else -> 2
-		}
+		val trim = Math.abs(v - 2)
 		return Pair(trim, 4 - trim)
 	}
 
