@@ -9,17 +9,19 @@ private fun input(prod: Boolean = false): List<String> {
 	)
 }
 
-data class Code(val encoded: String) {
-	private val regex = """([\w-]+)-(\d+)\[(\w{5})\]""".toRegex()
+object Factory {
+	val regex = """([\w-]+)-(\d+)\[(\w{5})\]""".toRegex()
 
-	val code: String get() = extract(1)
-	val sector: String get() = extract(2)
-	val checksum: String get() = extract(3)
-
-	private fun extract(group: Int) = regex.matchEntire(encoded)!!.groupValues[group]
+	fun code(encoded: String): Code {
+		val match: MatchResult = regex.matchEntire(encoded)!!
+		fun MatchResult.g(group: Int) = this.groupValues[group]
+		return Code(match.g(1), match.g(2), match.g(3))
+	}
 }
 
+data class Code(val code: String, val sector: String, val checksum: String)
+
 fun main(args: Array<String>) {
-	println(Code("aaaaa-bbb-z-y-x-123[abxyz]"))
+	println(Factory.code("aaaaa-bbb-z-y-x-123[abxyz]"))
 
 }
